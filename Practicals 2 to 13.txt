@@ -1,0 +1,364 @@
+================================================================================
+PRACTICAL NO. 2
+================================================================================
+Aim: Sensor Mote and Base Station Communication Study. Develop a simple communication scenario between multiple sensor motes and a base station to study data aggregation and sink node operation.
+
+Required Devices (Packet Tracer):
+- Base Station / Sink Node: Home Gateway (1)
+- Monitoring & Control Node: Smartphone (1)
+- Sensor Motes & Actuators: Motion Detector/Sensor (1), Garage Door (1), Ceiling Fan (1), and Light (1)
+
+Procedure:
+Step 1: Deploy Devices
+1. Open Cisco Packet Tracer.
+2. From the Network Devices menu, drag and drop 1 Home Gateway onto the workspace.
+3. From the End Devices select Smartphone, Motion Detector, Garage Door, Ceiling Fan and Light.
+
+Step 2: Register IoT Devices to the Home Gateway
+1. Click on each IoT device.
+2. In the Config tab, select Settings (Global).
+3. Under the IoT Server section: Select the Home Gateway radio button.
+4. Repeat this step for the Motion Detector, Light, Fan, and Garage Door.
+
+Step 3: Connect the Smartphone to the Home Gateway
+1. Click on the Smartphone.
+2. Go to the Config tab > Wireless0.
+3. Change the SSID from 'Default' to 'HomeGateway'.
+4. Close the window and verify that a wireless link is established between the Smartphone and the Home Gateway.
+
+Step 4: Verify the Home Gateway IP Address
+1. Click on the Home Gateway.
+2. Go to the Config tab > LAN.
+3. Note or copy the IPv4 Address (typically 192.168.25.1).
+
+Step 6: Access the IoT Web Server on the Smartphone
+1. Click on the Smartphone and navigate to the Desktop tab.
+2. Open the Web Browser.
+3. In the URL field, type the Home Gateway IP address and press Go.
+4. Log in using the default credentials: Username: admin; Password: admin.
+5. Click Sign In. You should now see all registered IoT devices listed on the dashboard.
+
+Step 7: Configure Automation Conditions
+1. In the Smartphone's IoT server dashboard, click on the Conditions tab.
+2. Click Add to create an automated rule: 
+   - Rule Name: Motion_Trigger_On
+   - If: Motion Detector > is on > True
+   - Then: Light > on > True; Ceiling Fan > status > Low (or High); Garage Door > open > True.
+3. Click OK to save the rule. (Optional) Add a reverse rule (Motion_Trigger_Off) to turn off or close devices when motion is False.
+
+Step 8: Simulate and Test Communication
+1. Hold down the Alt key on your keyboard.
+2. Hover your mouse cursor over the Motion Detector.
+3. The sensor's status light will turn Red (detecting motion).
+
+
+================================================================================
+PRACTICAL NO. 3
+================================================================================
+Aim: Creation of Simple Adhoc Network using TOSSIM. Create a multi-node ad-hoc network in TOSSIM and evaluate broadcast communication among nodes.
+
+Required Devices:
+- Wireless Access Router: WRT300N (1)
+- Ad-Hoc Wireless Host Nodes: PC-PT (5)
+- Hardware Wireless Module: PT-HOST-NM-1W (for each PC)
+
+Procedure:
+Step 1: Deploy Devices
+1. Open Cisco Packet Tracer.
+2. From Network Devices > Wireless Devices, drag and drop one WRT300N wireless router onto the workspace.
+3. From End Devices, drag and drop five PCs (PC0 to PC4) surrounding the wireless router.
+
+Step 2: Install Wireless Modules on All PCs
+1. Click on PC0 and open the Physical tab.
+2. Locate the Power Switch and switch it OFF (the green status LED turns off).
+3. Drag the existing FastEthernet module (PT-HOST-NM-1CFE) and release it over the module list on the left to remove it.
+4. Select the wireless interface module PT-HOST-NM-1W from the left pane and drag it into the empty slot.
+5. Switch the Power Switch back ON.
+6. Repeat this exact procedure for all remaining PCs (PC1, PC2, PC3, and PC4).
+
+Step 3: Establish Wireless Connections and Verify IP Allocation
+Wait a few moments for the nodes to associate. Because all PCs and the WRT300N share the default SSID (Default), wireless radiation rays will automatically link each PC to the wireless router.
+
+Step 4: Switch to Simulation Mode
+1. Switch from Realtime mode to Simulation mode by clicking the tab in the bottom-right corner (or press Shift + S).
+2. Click Show All/None to deselect all filters, then click Edit Filters.
+3. Under the IPv4 filter list, check ICMP and ARP to observe discovery broadcasts and data packets clearly.
+
+Step 5: Broadcast / Multi-Node Communication Execution
+1. Open PC0 > navigate to Desktop > Command Prompt.
+2. Execute a subnet-wide directed broadcast ping: ping 192.168.0.255
+
+
+================================================================================
+PRACTICAL NO. 4
+================================================================================
+Aim: Mote-to-Mote Radio Communication Simulation. Simulate packet transmission between two motes and analyze signal strength and packet loss under varying radio gain values.
+
+Required Devices:
+- WRT300N Router, Laptop, Smartphone and Tablet
+
+Procedure:
+Step 1: Select WRT300N Router, a laptop, a smartphone and tablet.
+Step 2: Select Laptop > Switch Off > Assign PT-LAPTOP-NM-1W > Assign it.
+Step 3: Select Router > Copy its IP address.
+Step 4: Select Laptop > IP Config > Select Static option > Assign 192.168.0.2. Select Tablet > Same procedure and assign 192.168.0.3. Select Smartphone > Same procedure and assign 192.168.0.4.
+Step 5: Select Laptop > Desktop > Open cmd > and type (ping 192.168.0.3). You should get reply from the device.
+
+
+================================================================================
+PRACTICAL NO. 5
+================================================================================
+Aim: Routing Table Generation and Analysis in WSN. Implement a simple routing mechanism and analyze routing table updates during topology changes.
+
+Required Devices:
+- Routers: Cisco 1841 (3)
+- Switches: Cisco 2960 (3)
+- End Devices: PC-PT (9)
+- Hardware Module: WIC-2T (for each router)
+- Cables: Automatically Choose Connection Type (for LAN links) and Serial DCE/DTE Cable (for WAN links)
+
+Procedure:
+Step 1: Deploy Devices
+1. Place 3 Routers (1841) on the workspace (R0, R1, R2).
+2. Place 3 Switches (2960) on the workspace (SW0, SW1, SW2).
+3. Place 9 PCs on the workspace (PC0 to PC8), grouping 3 PCs near each switch.
+
+Step 2: Add Serial Modules (WIC-2T) to Routers
+1. Click on R0 and go to the Physical tab.
+2. Turn OFF the power switch.
+3. Select WIC-2T from the Modules list and drag it into the empty slot on the right.
+4. Turn the power switch back ON.
+5. Repeat this exact process for R1 and R2.
+
+Step 3: Connect Devices using Cables
+1. Connect PC0, PC1 and PC2 to SW0; connect SW0 to R0. Connect PC3, PC4 and PC5 to SW1; connect SW1 to R1. Connect PC6, PC7 and PC8 to SW2; connect SW2 to R2, using Automatically Choose Connection Type.
+2. Select the Serial DCE cable. Connect R0 to R1, R1 to R2, and R2 to R0 using available serial ports.
+
+Step 4: Configure Router Interfaces
+1. On R0, go to Config > FastEthernet0/0, set Port Status On, IP Address 40.0.0.1 and Subnet Mask 255.0.0.0.
+2. Go to Config > Serial0/1/0, set Port Status On, Clock Rate 64000, IP Address 10.0.0.1 and Subnet Mask 255.0.0.0.
+3. Configure the corresponding interfaces on all routers.
+4. Configure RIP routing and enter the network addresses shown for the topology (10.0.0.0 and 40.0.0.0).
+
+Step 5: Test Connectivity using Ping
+1. Open PC > Desktop > Command Prompt.
+2. Run ping 40.0.0.2 and ping 40.0.0.3.
+3. Verify that replies are received successfully.
+
+
+================================================================================
+PRACTICAL NO. 6
+================================================================================
+Aim: Mote-to-PC Serial Communication Simulation. Implement serial communication between a sensor mote and PC to monitor real-time data transmission.
+
+Required Tools & Environment:
+- Simulation Platform: OMNET++ IDE (Eclipse-based Discrete Event Simulator)
+- Topology Specification: Network Description (.ned) File
+- Core Simulation Classes: C++ Simple Modules (Mote and PC)
+- Simulation Config File: Initialization File (omnetpp.ini)
+
+Procedure:
+Step 1: Create a New OMNET++ Project
+1. Launch the OMNET++ IDE.
+2. Go to File > New > OMNET++ Project.
+3. Enter the Project name (e.g., MoteSerialComm), select Create an empty project, and click Finish.
+
+Step 2: Create the Network Description (.ned) File
+1. Right-click on the newly created project folder in the Project Explorer.
+2. Select New > Network Description File (NED).
+3. Ensure the project root folder is selected as the container.
+4. Set the File name to MotePCSerial.ned and click Finish.
+5. Open MotePCSerial.ned and add the network and module topology.
+
+Step 3: Create the Mote Simple Module Class
+1. Right-click on your project folder in the Project Explorer.
+2. Select New > Simple Module (C++) (or New > Class).
+3. Set the Class name / Module name to Mote.
+4. Click Finish to generate Mote.h and Mote.cc.
+
+Step 4: Create the PC Simple Module Class
+1. Right-click on your project folder in the Project Explorer.
+2. Select New > Simple Module (C++) (or New > Class).
+3. Set the Class name / Module name to PC.
+4. Click Finish to generate PC.h and PC.cc.
+
+Step 5: Create the Simulation Configuration File (omnetpp.ini)
+1. Right-click on the project folder > New > Initialization File (INI).
+2. Set the name to omnetpp.ini and click Finish.
+3. Open omnetpp.ini to configure the simulation run parameters.
+
+Step 6: Build and Execute the Simulation
+1. Right-click the project folder in Project Explorer and click Build Project (or press Ctrl+B).
+2. Ensure there are zero compilation or linking errors in the Console window.
+3. Right-click omnetpp.ini > select Run As > OMNET++ Simulation (Qtenv graphical interface).
+4. In the simulation viewer, click Run or Fast to observe data transmission between the Mote and PC.
+
+
+================================================================================
+PRACTICAL NO. 7
+================================================================================
+Aim: Basic MANET Implementation with Packet Routing. Simulate a mobile ad-hoc network and observe packet routing.
+
+Required Devices:
+- Wireless router and wireless-capable end devices as shown in the practical topology
+
+Procedure:
+Step 1: Deploy the devices in Cisco Packet Tracer as shown in the topology.
+Step 2: Configure the wireless modules on the devices that require them.
+Step 3: Establish wireless connections between the devices.
+Step 4: Switch to Simulation mode and select the required packet filters.
+Step 5: Generate packet traffic and observe the packet flow between nodes.
+
+
+================================================================================
+PRACTICAL NO. 8
+================================================================================
+Aim: Simulation of CSMA/CA MAC Protocol. Implement CSMA/CA protocol simulation and evaluate collision avoidance mechanisms.
+
+Required Devices:
+- Wireless Access Point / Router: WRT300N (1)
+- End Devices: PC-PT (2), Laptop (1), Tablet PC (1), Smartphone (1), Server-PT (1)
+- Hardware Wireless Module: WIC-1W / PT-HOST-NM-1W (for Server, PCs, and Laptop)
+
+Procedure:
+Step 1: Deploy Devices
+1. Open Cisco Packet Tracer.
+2. From Network Devices > Wireless Devices, drag and drop one WRT300N wireless router onto the workspace.
+3. From End Devices, drag and drop: 2 PCs (PC0, PC1); 1 Laptop (Laptop0); 1 Tablet PC (Tablet0); 1 Smartphone (Smartphone0); 1 Server (Server0).
+
+Step 2: Install Wireless Modules on Non-Wireless Devices
+(For PC0, PC1, Laptop0, and Server0, replace the wired Ethernet interface with a wireless network interface module.)
+1. Click on the device (PC0).
+2. Go to the Physical tab and toggle the Power Switch to OFF.
+3. Drag the existing Fast Ethernet module (PT-HOST-NM-1CFE) out and drop it onto the modules list on the left to remove it.
+4. From the left MODULES pane, select PT-HOST-NM-1W and drag it into the empty slot.
+5. Turn the Power Switch back ON.
+6. Repeat this exact process for PC1, Laptop0, and Server0.
+
+Step 3: Configure Router SSID
+1. Click on the WRT300N router.
+2. Navigate to the GUI tab > Wireless > Basic Wireless Settings.
+3. Under Network Name (SSID), change the value from Default to CSMA-CD.
+4. Scroll to the bottom of the page and click Save Settings.
+
+Step 4: Connect End Devices to the New SSID
+Update the SSID on each client device to match the router:
+1. For PCs, Laptop, and Server: Click the device > navigate to Config > Wireless0. Under the SSID field, replace Default with CSMA-CD. Ensure IP Configuration is set to DHCP.
+2. For Tablet and Smartphone: Click the device > navigate to Config > Wireless0. Under the SSID field, replace Default with CSMA-CD. Ensure IP Configuration is set to DHCP.
+3. Verify that wireless connection rays appear between all devices and the WRT300N router.
+
+Step 5: Obtain Device MAC Address and Configure MAC Filtering
+1. Click on the device you wish to restrict (e.g., PC0).
+2. Go to Config > Wireless0 and copy/note the MAC Address (e.g., 0001.968A.1234).
+3. Click on the WRT300N router > open the GUI tab.
+4. Navigate to Wireless > Wireless MAC Filter.
+5. Select the Enabled radio button.
+6. Under Access Restriction, select the radio button Prevent PCs listed below from accessing the wireless network.
+7. In the MAC 01 entry field, enter the copied MAC address formatted with colons.
+8. Scroll down and click Save Settings.
+
+
+================================================================================
+PRACTICAL NO. 9
+================================================================================
+Aim: MANET Simulation with Directional Antenna. Simulate MANET using directional antennas and analyse improvements in spatial reuse and interference reduction.
+
+Required Devices:
+- Base Station / Access Gateway: Home Gateway (1)
+- Dedicated IoT Controller: Server-PT (1)
+- Mobile Monitoring Terminal: Smartphone (1)
+- IoT Sensor & Actuator Nodes: Window (1), Door (1), Light (1), Home Speaker (1)
+- Hardware Wireless Module: PT-HOST-NM-1W (for Server-PT)
+
+Procedure:
+Step 1: Deploy Devices
+1. Open Cisco Packet Tracer.
+2. From Network Devices > Wireless Devices, place one Home Gateway onto the workspace.
+3. From End Devices, place 1 Server (Server0) and 1 Smartphone (Smartphone0).
+4. From End Devices > Smart Home / IoT, place 1 Window, 1 Door, 1 Light, and 1 Home Speaker.
+
+Step 2: Install Wireless Module on Server
+1. Click on Server0 and navigate to the Physical tab.
+2. Toggle the Power Switch to OFF.
+3. Drag and remove the existing Ethernet card (PT-HOST-NM-1CFE).
+4. Select the PT-HOST-NM-1W wireless module from the list and insert it into the empty slot.
+5. Turn the Power Switch back ON.
+
+
+================================================================================
+PRACTICAL NO. 10
+================================================================================
+Aim: IoT-based Client-Server Communication. Simulate a mobile network consisting of a web server and web browser, and analyze packet flow during data communication.
+
+Required Devices:
+- Cellular Infrastructure: Cell Tower (1), Central Office Server / CO-Server (1)
+- Local Wireless Access Point: Wireless Router - WRT300N (1)
+- Servers & End Devices: Server-PT (1), PC-PT (1), Smartphone (1)
+- Hardware Wireless Module: PT-HOST-NM-1W (for PC and Web Server)
+- Cables: Automatically Choose Connection Type (Copper/Coaxial links)
+
+Procedure:
+Step 1: Deploy Devices
+1. Open Cisco Packet Tracer.
+2. Add one Cell Tower, one Central Office Server, one WRT300N wireless router, one Server-PT, one PC-PT and one Smartphone.
+
+Step 2: Install Wireless Modules on PC and Web Server
+1. Turn off each device, replace the Fast Ethernet module with PT-HOST-NM-1W, and turn the device on.
+2. Repeat for the Server-PT and confirm wireless association with the router.
+
+Step 4: Verify Web Server Service and IP Address
+1. On Server-PT, open Services > HTTP and verify HTTP and HTTPS are ON.
+2. Open Desktop > IP Configuration, select DHCP and note the IPv4 address.
+
+Step 5: Access Web Server from Smartphone Browser
+1. On the Smartphone, open Desktop > Web Browser.
+2. Enter the Server IP address in the URL bar and click Go.
+
+
+================================================================================
+PRACTICAL NO. 11
+================================================================================
+Aim: Implementation of AODV Routing Protocol. Simulate the AODV Routing Protocol and analyze route discovery and route maintenance mechanisms.
+
+Required Tools & Environment:
+- OMNET++ IDE
+- INET Framework (inet-4.7.0)
+- AODV example network files in the examples folder
+
+Procedure:
+Step 1: Open OMNET++ > inet-4.7.0 > Select examples folder > Open aodv.
+Step 2: Select General and Run.
+
+
+================================================================================
+PRACTICAL NO. 12
+================================================================================
+Aim: TDMA-based MAC Protocol Simulation. Simulate TDMA slot allocation and compare energy efficiency.
+
+Required Tools & Environment:
+- Simulation Platform: OMNET++ IDE
+- Topology & Network Description (.ned) Files (TDMA.ned, TDMANode.ned)
+- Protocol Classes: C++ Simple Module (TDMANode.h, TDMANode.cc)
+- Simulation Configuration: Initialization File (tdma.ini)
+
+Procedure:
+Step 1: Open OMNET++.
+Step 2: Open inet-4.7.0 > showcases > wireless > sensornetwork > omnetpp.ini.
+Step 3: Build your project > Run > Select Sensor Network Showcase and select LMAC, then run the simulation.
+
+
+================================================================================
+PRACTICAL NO. 13
+================================================================================
+Aim: Energy-Aware MAC Protocol for WSN. Implement duty-cycling MAC protocol and evaluate energy conservation in sensor networks.
+
+Required Tools & Environment:
+- Simulation Platform: OMNET++ IDE
+- Framework: INET Framework (version inet-4.5.x / inet-4.7.0 or compatible)
+- Showcase Model: Sensor Network Showcase.ned located in inet-4.7.0/showcases/wireless/sensornetwork
+- Configuration File: omnetpp.ini (located in the same showcase directory)
+
+Procedure:
+Step 1: Open OMNET++ IDE.
+Step 2: Open inet-4.7.0 > showcases > wireless > sensornetwork > omnetpp.ini.
+Step 3: Build your project > Run > Select SensorNetwork Showcase and select XMAC, then run the simulation.
